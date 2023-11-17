@@ -18,3 +18,7 @@ else
   echo "Firmware overrides are disabled, skipping...\n"
   echo "To enable firmware overrides, edit /etc/device-quirks/device-quirks.conf"
 fi
+
+# Create an equalizer for pipewire.
+mkdir -p ~/.config/pipewire/pipewire.conf.d
+cp $DQ_PATH/scripts/asus/ally/sink-eq6.conf ~/.config/pipewire/pipewire.conf.d/sink-eq6.conf
