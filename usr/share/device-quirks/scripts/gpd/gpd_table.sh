@@ -11,6 +11,9 @@ BOARD_WM2="G1619-04"
 # Win4
 BOARD_WIN4="G1618-04"
 
+# WinMini
+BOARD_WINMINI="G1617-01"
+
 # WinMax2
 if [[ ":$BOARD_WM2:" =~ ":$BOARD_NAME:" ]]; then
   echo "WinMax2"
@@ -18,6 +21,9 @@ if [[ ":$BOARD_WM2:" =~ ":$BOARD_NAME:" ]]; then
 elif [[ ":$BOARD_WIN4:" =~ ":$BOARD_NAME:" ]]; then
   echo "Win4"
   $DQ_PATH/scripts/gpd/win4/win4.sh
+elif [[ ":$BOARD_WINMINI:" =~ ":$BOARD_NAME:" ]]; then
+  echo "WinMini"
+  $DQ_PATH/scripts/gpd/winmini/winmini.sh
 
 # No Match
 else
