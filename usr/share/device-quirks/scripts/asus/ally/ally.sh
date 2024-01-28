@@ -6,21 +6,6 @@ if [ "$(whoami)" != 'root' ]; then
   exit 1
 fi
 
-if [ -d /tmp/frzr_root ]; then
-  source ${MOUNT_PATH}/etc/device-quirks/device-quirks.conf
-else
-  source /etc/device-quirks/device-quirks.conf
-fi
-
-# Do DSDT override.
-DSDT_OVERRIDES="rog_ally_0x08.dsl rog_ally_0x13.dsl rog_ally_0x58.dsl rog_ally_0x76.dsl"
-if [[ $USE_FIRMWARE_OVERRIDES == 1 ]]; then
-  $DQ_PATH/scripts/override_dsdt $DSDT_OVERRIDES
-else
-  echo "Firmware overrides are disabled, skipping...\n"
-  echo "To enable firmware overrides, edit /etc/device-quirks/device-quirks.conf"
-fi
-
 # Define the path of the ally.sh script and pipewire folder
 ally_dir="$DQ_PATH/scripts/asus/ally"
 pipewire_dir="$ally_dir/pipewire"  # Adjust this path as necessary
