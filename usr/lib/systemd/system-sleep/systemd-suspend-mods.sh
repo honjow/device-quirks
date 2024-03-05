@@ -11,11 +11,13 @@ NEXT_LIST="NEXT Advance:NEXT Lite:NEXT Pro:NEXT"
 
 SKIP_MT7921E=false
 if [[ ":$ROG_LIST:" =~ ":$PRODUCT:" ]]; then
+    echo "ROG Ally detected, skipping mt7921e"
     SKIP_MT7921E=true
 fi
 
 if [[ ":$NEXT_LIST:" =~ ":$PRODUCT:" ]]; then
-    MOD_LIST+=('iwlmvm')
+    echo "NEXT detected, adding iwlmvm to the list of modules to be removed"
+    MOD_LIST=$(echo -e "${MOD_LIST}\niwlmvm")
 fi
 
 echo -e "MOD_LIST: \n$MOD_LIST"
