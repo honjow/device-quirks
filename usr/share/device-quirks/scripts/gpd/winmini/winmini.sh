@@ -6,6 +6,12 @@ if [ "$(whoami)" != 'root' ]; then
   exit 1
 fi
 
+if [ -d /tmp/frzr_root ]; then
+  source ${MOUNT_PATH}/etc/device-quirks/device-quirks.conf
+else
+  source /etc/device-quirks/device-quirks.conf
+fi
+
 winmini_dir="$DQ_PATH/scripts/gpd/winmini"
 pipewire_dir="$winmini_dir/pipewire"  # Adjust this path as necessary
 
