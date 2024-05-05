@@ -3,7 +3,7 @@
 # Detect if the install media is running or not
 if [ ! -d /tmp/frzr_root ]; then
   SUBVOL=""
-  MOUNT_PATH=""
+  MOUNT_PATH="/frzr_root"
 fi
 
 # Define the bootloader entry file
