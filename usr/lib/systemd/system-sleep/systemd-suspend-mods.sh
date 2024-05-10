@@ -7,16 +7,9 @@ MOD_LIST=$(grep -v ^\# /etc/device-quirks/systemd-suspend-mods.conf)
 
 PRODUCT=$(cat /sys/devices/virtual/dmi/id/product_name)
 
-ROG_LIST="ROG Ally RC71L_RC71L:ROG Ally RC71L"
 NEXT_LIST="NEXT Advance:NEXT Lite:NEXT Pro:NEXT"
 GEEK_LIST="GEEK:GEEK 1S"
 AYANEO_2021_LIST="AYA NEO FOUNDER:AYA NEO 2021:AYANEO 2021:AYANEO 2021 Pro:AYANEO 2021 Pro Retro Power"
-
-SKIP_MT7921E=false
-if [[ ":$ROG_LIST:" =~ ":$PRODUCT:" ]]; then
-    echo "ROG Ally detected, skipping mt7921e"
-    SKIP_MT7921E=true
-fi
 
 if [[ ":$NEXT_LIST:" =~ ":$PRODUCT:" ]]; then
     echo "NEXT detected, adding iwlmvm to the list of modules to be removed"
@@ -33,17 +26,11 @@ echo -e "MOD_LIST: \n$MOD_LIST"
 case $1 in
     pre)
         for mod in $MOD_LIST; do
-            if [[ $SKIP_MT7921E == true && $mod == "mt7921e" ]]; then
-                continue
-            fi
             modprobe -r $mod
         done
     ;;
     post)
         for mod in $MOD_LIST; do
-            if [[ $SKIP_MT7921E == true && $mod == "mt7921e" ]]; then
-                continue
-            fi
             modprobe $mod
         done
     ;;
