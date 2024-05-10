@@ -55,3 +55,6 @@ fi
 
 # Run networking devices configuration script.
 $DQ_PATH/scripts/netdev_config.sh
+
+# Run suspend mods configuration script.
+$DQ_PATH/scripts/suspend_mods_config.sh
