@@ -20,3 +20,7 @@ if [ ! -d "${MOUNT_PATH}/etc/device-quirks/firmware/" ]; then
     mkdir -p "${MOUNT_PATH}/etc/device-quirks/firmware/"
 fi
 ln -sf "/usr/lib/firmware/aw87xxx/aw87556/awinic_smartk_acf.bin" "${MOUNT_PATH}/etc/device-quirks/firmware/aw87xxx_acf.bin"
+
+# fixing suspend resume
+echo "Fixing suspend resume"
+$DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
