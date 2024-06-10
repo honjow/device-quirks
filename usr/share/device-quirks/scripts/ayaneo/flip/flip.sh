@@ -20,4 +20,4 @@ echo "Creating symlink to aw87xxx firmware file"
 if [ ! -d "${MOUNT_PATH}/etc/device-quirks/firmware/" ]; then
     mkdir -p "${MOUNT_PATH}/etc/device-quirks/firmware/"
 fi
-ln -sf "/usr/lib/firmware/aw87xxx/aw87556/awinic_smartk_acf.bin" "${MOUNT_PATH}/etc/device-quirks/firmware/aw87xxx_acf.bin"
+ln -sf "/usr/lib/firmware/aw87xxx/aw87559/awinic_smartk_acf.bin" "${MOUNT_PATH}/etc/device-quirks/firmware/aw87xxx_acf.bin"
