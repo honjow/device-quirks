@@ -12,17 +12,23 @@ else
   source /etc/device-quirks/device-quirks.conf
 fi
 
-winmini_dir="$DQ_PATH/scripts/gpd/winmini"
-pipewire_dir="$winmini_dir/pipewire"  # Adjust this path as necessary
+# Define the path of the gpd win mini pipewire config and pipewire folders
+MINI_CONF="$DQ_PATH/scripts/gpd/winmini/pipewire.conf.d/filter-chain.conf"
+PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
 
 # Check if the PipeWire directory exists
-if [ -d "$pipewire_dir" ]; then
-    # Copy the PipeWire folder to /etc
-    cp -r "$pipewire_dir" /etc/
-    echo "PipeWire configuration successfully copied to /etc."
+if [[ -f "${MINI_CONF}" ]]; then
+  echo "Installing pipewire config from ${MINI_CONF} to ${PIPEWIRE_DIR}"
+  if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
+    mkdir -p "${PIPEWIRE_DIR}"
+  fi
+
+  # Copy the PipeWire folder to /etc
+  cp "${MINI_CONF}" "${PIPEWIRE_DIR}"
+  echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
 else
-    echo "PipeWire directory not found in $pipewire_dir."
-    exit 1
+  echo "PipeWire config not found at ${MINI_CONF}"
+  exit 1
 fi
 
 if [[ $USE_FIRMWARE_OVERRIDES == 1 ]]; then
