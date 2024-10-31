@@ -7,6 +7,7 @@ fi
 
 PRODUCT=$(cat /sys/devices/virtual/dmi/id/product_name)
 
+AIR_LIST="AIR:AIR Pro"
 NEXT_LIST="NEXT Advance:NEXT Lite:NEXT Pro:NEXT"
 GEEK_LIST="GEEK:GEEK 1S"
 AYANEO_2021_LIST="AYA NEO FOUNDER:AYA NEO 2021:AYANEO 2021:AYANEO 2021 Pro:AYANEO 2021 Pro Retro Power"
@@ -34,5 +35,16 @@ if [[ "AYANEO 2S" == "$PRODUCT" || "GEEK 1S" == "$PRODUCT" ]]; then
     # add usb_hid to the list of modules, if it's not already there
     if ! grep -q usb_hid $suspend_mods_file; then
         echo "usb_hid" >> $suspend_mods_file
+    fi
+fi
+
+if [[ ":$AIR_LIST:" =~ ":$PRODUCT:" ]]; then
+    # if AX210 is detected, add iwlmvm to the list of modules to be removed
+    if lspci | grep -q "AX210"; then
+        echo "AIR series detected, and AX210 detected, adding iwlmvm to the list of modules to be removed"
+        # add iwlmvm to the list of modules, if it's not already there
+        if ! grep -q iwlmvm $suspend_mods_file; then
+            echo "iwlmvm" >> $suspend_mods_file
+        fi
     fi
 fi
