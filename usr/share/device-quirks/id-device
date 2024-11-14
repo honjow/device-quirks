@@ -11,6 +11,7 @@ AYANEO_LIST="AYADEVICE:AYA NEO:AYANEO"
 GPD_LIST="GPD"
 LENOVO_LIST="LENOVO"
 OXP_LIST="ONE-NETBOOK TECHNOLOGY CO., LTD.:ONE-NETBOOK"
+MSI_LIST="Micro-Star International Co., Ltd."
 
 
 # AOKZOE Devices
@@ -47,6 +48,11 @@ elif [[ ":$LENOVO_LIST:" =~ ":${VENDOR}:" ]]; then
 elif [[ ":$OXP_LIST:" =~ ":${VENDOR}:" ]]; then
     echo "OXP Device Found!"
     $DQ_PATH/scripts/oxp/oxp_table.sh
+
+# MSI Devices
+elif [[ ":$MSI_LIST:" =~ ":${VENDOR}:" ]]; then
+    echo "MSI Device Found!"
+    $DQ_PATH/scripts/msi/msi_table.sh
 
 # Unrecognized Device
 else
