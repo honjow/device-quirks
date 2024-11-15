@@ -32,3 +32,9 @@ else
   echo "PipeWire config not found at ${ALLY_CONF}"
   exit 1
 fi
+
+WIREPLUMBER_DST="${MOUNT_PATH}/etc/wireplumber/wireplumber.conf.d"
+WIREPLUMBER_SRC="$DQ_PATH/scripts/asus/rog-ally-x/wireplumber.conf.d"
+
+# wireplumber_config.sh
+$DQ_PATH/scripts/wireplumber_config.sh "$WIREPLUMBER_SRC" "$WIREPLUMBER_DST"

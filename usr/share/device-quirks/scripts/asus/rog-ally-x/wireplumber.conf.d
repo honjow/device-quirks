@@ -1,0 +1,1 @@
+../../../../wireplumber/hardware-profiles/asustek computer inc.-rog ally x rc72la_rc72la/wireplumber.conf.d
