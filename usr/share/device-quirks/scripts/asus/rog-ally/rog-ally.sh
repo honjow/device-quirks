@@ -33,6 +33,16 @@ else
   exit 1
 fi
 
+ALLY_EQ_CONF="$DQ_PATH/scripts/asus/rog-ally/pipewire.conf.d/filter-chain-eq.conf"
+if [[ -f "${ALLY_EQ_CONF}" ]]; then
+  echo "Installing pipewire eq config from ${ALLY_EQ_CONF} to ${PIPEWIRE_DIR}"
+  cp "${ALLY_EQ_CONF}" "${PIPEWIRE_DIR}"
+  echo "PipeWire eq configuration successfully copied to ${PIPEWIRE_DIR}"
+else
+  echo "PipeWire eq config not found at ${ALLY_EQ_CONF}"
+  exit 1
+fi
+
 
 WIREPLUMBER_DST="${MOUNT_PATH}/etc/wireplumber/wireplumber.conf.d"
 WIREPLUMBER_SRC="$DQ_PATH/scripts/asus/rog-ally/wireplumber.conf.d"
