@@ -12,10 +12,20 @@ NEXT_LIST="NEXT Advance:NEXT Lite:NEXT Pro:NEXT"
 GEEK_LIST="GEEK:GEEK 1S"
 AYANEO_2021_LIST="AYA NEO FOUNDER:AYA NEO 2021:AYANEO 2021:AYANEO 2021 Pro:AYANEO 2021 Pro Retro Power"
 
+MSI_CLAW_LIST="Claw A1M"
+
 suspend_mods_file="${MOUNT_PATH}/etc/device-quirks/systemd-suspend-mods.conf"
 
 if [[ ":$NEXT_LIST:" =~ ":$PRODUCT:" ]]; then
     echo "NEXT detected, adding iwlmvm to the list of modules to be removed"
+    # add iwlmvm to the list of modules, if it's not already there
+    if ! grep -q iwlmvm $suspend_mods_file; then
+        echo "iwlmvm" >> $suspend_mods_file
+    fi
+fi
+
+if [[ ":$MSI_CLAW_LIST:" =~ ":$PRODUCT:" ]]; then
+    echo "MSI Claw detected, adding iwlmvm to the list of modules to be removed"
     # add iwlmvm to the list of modules, if it's not already there
     if ! grep -q iwlmvm $suspend_mods_file; then
         echo "iwlmvm" >> $suspend_mods_file
