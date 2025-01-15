@@ -37,6 +37,6 @@ case "$1" in
         ;;
     post)
         # Apply wake profile after system wakes up
-        run_openrgb "$wake_profile"
+        run_openrgb "$wake_profile" &
         ;;
 esac
