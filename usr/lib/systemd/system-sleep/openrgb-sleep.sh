@@ -24,10 +24,23 @@ else
     fi
 fi
 
+# Function to check if profile exists
+check_profile() {
+    profile="$1"
+    profile_path="/home/$CURRENT_USER/.config/OpenRGB/$profile.orp"
+    if [ ! -f "$profile_path" ]; then
+        echo "Profile '$profile' not found at $profile_path"
+        return 1
+    fi
+    return 0
+}
+
 # Function to run openrgb as the user
 run_openrgb() {
     profile="$1"
-    su - "$CURRENT_USER" -c "openrgb --profile '$profile'"
+    if check_profile "$profile"; then
+        su - "$CURRENT_USER" -c "openrgb --profile '$profile'"
+    fi
 }
 
 case "$1" in
@@ -37,6 +50,6 @@ case "$1" in
         ;;
     post)
         # Apply wake profile after system wakes up
-        run_openrgb "$wake_profile" &
+        run_openrgb "$wake_profile"
         ;;
 esac
