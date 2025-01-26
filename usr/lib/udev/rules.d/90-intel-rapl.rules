@@ -1,0 +1,1 @@
+SUBSYSTEM=="powercap", KERNEL=="intel-rapl:*", ATTR{energy_uj}!="", RUN+="/bin/chmod 0444 /sys/class/powercap/%k/energy_uj"
