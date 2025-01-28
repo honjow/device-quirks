@@ -29,17 +29,8 @@ if [[ -f "${ALSA_CONF}" ]]; then
   echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
 fi
 
-MAIN_ALSA_CONF="$DQ_PATH/scripts/msi/claw8/main.lua.d/50-alsa-config.lua"
-WIREPLUMBER_DIR="${MOUNT_PATH}/etc/wireplumber/main.lua.d/"
+# Force 16 bit audio, format S16LE, sample rate 96000.
+echo "Force S16LE 96000hz"
+$DQ_PATH/scripts/override_bitrate
 
-# Check if the WirePlumber directory exists
-if [[ -f "${MAIN_ALSA_CONF}" ]]; then
-  echo "Installing WirePlumber config from ${MAIN_ALSA_CONF} to ${WIREPLUMBER_DIR}"
-  if [[ ! -d "${WIREPLUMBER_DIR}" ]]; then
-    mkdir -p "${WIREPLUMBER_DIR}"
-  fi
-
-  # Copy the WirePlumber folder to /etc
-  cp "${MAIN_ALSA_CONF}" "${WIREPLUMBER_DIR}"
-  echo "WirePlumber configuration successfully copied to ${WIREPLUMBER_DIR}"
-fi
+sed -i 's/--\["api.alsa.headroom"\]      = 1024/\["api.alsa.headroom"\]      = 2048/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
