@@ -30,7 +30,7 @@ if [[ -f "${ALSA_CONF}" ]]; then
 fi
 
 # Force 16 bit audio, format S16LE, sample rate 96000.
-echo "Force S16LE 96000hz"
-$DQ_PATH/scripts/override_bitrate
+# echo "Force S16LE 96000hz"
+# $DQ_PATH/scripts/override_bitrate
 
 sed -i 's/--\["api.alsa.headroom"\]      = 1024/\["api.alsa.headroom"\]      = 2048/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
