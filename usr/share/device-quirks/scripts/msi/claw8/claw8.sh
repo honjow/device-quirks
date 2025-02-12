@@ -33,5 +33,11 @@ fi
 # echo "Force S16LE 96000hz"
 # $DQ_PATH/scripts/override_bitrate
 
-cp -a ${SUBVOL}/usr/share/wireplumber ${MOUNT_PATH}/etc/
-sed -i 's/--\["api.alsa.headroom"\]      = 1024/\["api.alsa.headroom"\]      = 4096/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
+# cp -a ${SUBVOL}/usr/share/wireplumber ${MOUNT_PATH}/etc/
+# sed -i 's/--\["api.alsa.headroom"\]      = 1024/\["api.alsa.headroom"\]      = 4096/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
+
+WIREPLUMBER_DST="${MOUNT_PATH}/etc/wireplumber/wireplumber.conf.d"
+WIREPLUMBER_SRC="$DQ_PATH/scripts/msi/claw8/wireplumber.conf.d"
+
+# wireplumber_config.sh
+$DQ_PATH/scripts/wireplumber_config.sh "$WIREPLUMBER_SRC" "$WIREPLUMBER_DST"
