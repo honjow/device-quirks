@@ -1,0 +1,2 @@
+# remove fp sensor for MSI Claw8
+SUBSYSTEM=="usb", ATTR{idVendor}=="27c6", ATTR{idProduct}=="6092", ATTR{remove}="1"
