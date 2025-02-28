@@ -26,6 +26,9 @@ elif [[ ":$PRODUCT_LIST_KUN:" =~ ":$PRODUCT_NAME:" ]]; then
 elif [[ ":$PRODUCT_LIST_SLIDE:" =~ ":$PRODUCT_NAME:" ]]; then
 	echo "AYA NEO SLIDE"
 	$DQ_PATH/scripts/ayaneo/slide/slide.sh
+elif [[ "$PRODUCT_NAME" =~ "NEO 2021" ]]; then
+	echo "AYA NEO 2021"
+	$DQ_PATH/scripts/ayaneo/2021/2021.sh
 else
 	echo "${PRODUCT_NAME} does not have a quirk configuration script. Exiting."
 fi
