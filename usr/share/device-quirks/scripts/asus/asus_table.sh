@@ -1,5 +1,6 @@
 #/bin/bash
 BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
+PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
 CPU_NAME="$(cat /proc/cpuinfo | awk 'NR==5 {print $4$5$6$7}')"
 
 if [[ "RC71L" == "$BOARD_NAME" ]] && [[ "AMDRyzenZ1Extreme" == "$CPU_NAME" ]]; then
@@ -8,6 +9,10 @@ if [[ "RC71L" == "$BOARD_NAME" ]] && [[ "AMDRyzenZ1Extreme" == "$CPU_NAME" ]]; t
 elif [[ "RC72LA" == "$BOARD_NAME" ]] && [[ "AMDRyzenZ1Extreme" == "$CPU_NAME" ]]; then
   echo "ROG Ally X detected"
   $DQ_PATH/scripts/asus/rog-ally-x/rog-ally-x.sh
+elif [[ "$PRODUCT_NAME" =~ "ROG Flow Z13" ]]; then
+  echo "ROG Flow Z13 detected"
+  # ROG Flow Z13 GZ302EA_GZ302EA
+  $DQ_PATH/scripts/asus/rog-flow-z13/rog-flow-z13.sh
 else
   echo "${PRODUCT_NAME} does not have a quirk configuration script. Exiting."
 fi
