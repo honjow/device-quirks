@@ -50,8 +50,19 @@ case "$1" in
 
             # Check if the parameter with the same key already exists
             if echo "$current_params" | grep -q "\b${param_key}="; then
+                # Extract the current value of this parameter
+                current_value=$(echo "$current_params" | grep -o "\b${param_key}=[^ ]*" | cut -d'=' -f2)
+                new_value="${search_string#*=}"
+                
+                # Check if the values are the same
+                if [ "$current_value" = "$new_value" ]; then
+                    echo "Parameter '$param_key' already exists with the same value ($new_value) in $entry_file"
+                    echo "No changes needed"
+                    exit 0
+                fi
+                
                 echo "Parameter with key '$param_key' already exists in $entry_file"
-                echo "Updating parameter value"
+                echo "Updating parameter value from '$current_value' to '$new_value'"
                 
                 # Replace the existing parameter with the new one
                 if [ "$bootloader" = "systemd" ]; then
