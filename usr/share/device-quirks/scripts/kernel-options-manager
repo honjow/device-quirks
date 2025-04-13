@@ -49,27 +49,24 @@ case "$1" in
             fi
 
             # Check if the parameter with the same key already exists
-            if echo "$current_params" | grep -q "\b${param_key}="; then
+            if echo "$current_params" | grep -q "\(^\| \)${param_key}="; then
                 # Extract the current value of this parameter
-                current_value=$(echo "$current_params" | grep -o "\b${param_key}=[^ ]*" | cut -d'=' -f2)
-                new_value="${search_string#*=}"
+                current_param=$(echo "$current_params" | grep -o "\(^\| \)${param_key}=[^ ]*" | sed 's/^ //')
+                current_value="${current_param#${param_key}=}"
+                new_value="${search_string#${param_key}=}"
                 
                 # Check if the values are the same
                 if [ "$current_value" = "$new_value" ]; then
-                    echo "Parameter '$param_key' already exists with the same value ($new_value) in $entry_file"
+                    echo >&2 "Parameter '$param_key' already exists with the same value ($new_value) in $entry_file"
                     echo "No changes needed"
                     exit 0
                 fi
                 
-                echo "Parameter with key '$param_key' already exists in $entry_file"
-                echo "Updating parameter value from '$current_value' to '$new_value'"
+                echo >&2 "Parameter with key '$param_key' already exists in $entry_file"
+                echo >&2 "Updating parameter value of '$param_key' from '$current_value' to '$new_value'"
                 
                 # Replace the existing parameter with the new one
-                if [ "$bootloader" = "systemd" ]; then
-                    sed -i "s~\b${param_key}=[^ ]*~${search_string}~g" "$entry_file"
-                elif [ "$bootloader" = "grub" ]; then
-                    sed -i "s~\b${param_key}=[^ ]*~${search_string}~g" "$entry_file"
-                fi
+                sed -i "s~\(^\| \)${param_key}=[^ ]*~\1${search_string}~g" "$entry_file"
                 
                 echo "Updated parameter '$param_key' with new value in $entry_file"
                 exit 0
@@ -108,11 +105,7 @@ case "$1" in
             # Check if any parameter with this key exists
             if echo "$current_params" | grep -q "\(^\| \)${remove_string}="; then
                 # Remove the parameter with this key
-                if [ "$bootloader" = "systemd" ]; then
-                    sed -i "s~ ${remove_string}=[^ ]*~~g" "$entry_file"
-                elif [ "$bootloader" = "grub" ]; then
-                    sed -i "s~ ${remove_string}=[^ ]*~~g" "$entry_file"
-                fi
+                sed -i "s| $remove_string=[^ ]*||g" "$entry_file"
                 
                 echo "Removed parameter with key '$remove_string' from $entry_file"
                 found_match=true
@@ -131,11 +124,7 @@ case "$1" in
         # Check if the exact parameter exists as a whole word
         if echo "$param_list" | grep -qx "$remove_string"; then
             # Remove only if it's a whole parameter (followed by space or end of line)
-            if [ "$bootloader" = "systemd" ]; then
-                sed -i "s~ $remove_string\( \|$\)~ ~g" "$entry_file"
-            elif [ "$bootloader" = "grub" ]; then
-                sed -i "s~ $remove_string\( \|$\)~ ~g" "$entry_file"
-            fi
+            sed -i "s~ $remove_string\( \|$\)~ ~g" "$entry_file"
             echo "Removed '$remove_string' from the kernel parameters in $entry_file"
             found_match=true
         fi
@@ -143,9 +132,9 @@ case "$1" in
         # If no match was found in any of the checks, display a message
         if [ "$found_match" = false ]; then
             if [[ "$remove_string" != *"="* ]]; then
-                echo "No parameter with key '$remove_string' found in $entry_file"
+                echo >&2 "No parameter with key '$remove_string' found in $entry_file"
             else
-                echo "Parameter '$remove_string' not found in $entry_file"
+                echo >&2 "Parameter '$remove_string' not found in $entry_file"
             fi
         fi
         ;;
