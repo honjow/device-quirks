@@ -17,6 +17,9 @@ BOARD_WIN4="G1618-04"
 # WinMini
 BOARD_WINMINI="G1617-01"
 
+# Pocket4
+BOARD_POCKET4="G1628-04"
+
 # WinMax2
 if [[ ":$BOARD_WM2:" =~ ":$BOARD_NAME:" ]]; then
   echo "WinMax2"
@@ -30,7 +33,9 @@ elif [[ ":$BOARD_WINMINI:" =~ ":$BOARD_NAME:" ]]; then
 elif [[ ":$BOARD_WIN3:" =~ ":$BOARD_NAME:" ]]; then
   echo "Win3"
   $DQ_PATH/scripts/gpd/win3/win3.sh
-
+elif [[ ":$BOARD_POCKET4:" =~ ":$BOARD_NAME:" ]]; then
+  echo "Pocket4"
+  $DQ_PATH/scripts/gpd/pocket4/pocket4.sh
 # No Match
 else
   echo "${BOARD_NAME} does not have a quirk configuration script. Exiting."
