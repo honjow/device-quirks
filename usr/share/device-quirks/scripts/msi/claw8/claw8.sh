@@ -60,4 +60,5 @@ mkdir -p "$MODULES_LOAD_D_DST"
 for file in $(find "$MODULES_LOAD_D_SRC" -type f); do
   filename=$(basename "$file")
   dst="$MODULES_LOAD_D_DST/$filename"
+  cp "$file" "$dst"
 done
