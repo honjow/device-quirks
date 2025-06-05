@@ -41,5 +41,15 @@ for file in $(find "$MODULES_LOAD_D_SRC" -type f); do
   cp "$file" "$dst"
 done
 
+# modprobe.d
+MODPROBE_D_DST="${MOUNT_PATH}/etc/modprobe.d/"
+MODPROBE_D_SRC="$DQ_PATH/scripts/msi/claw_a1m/modprobe.d"
+mkdir -p "$MODPROBE_D_DST"
+for file in $(find "$MODPROBE_D_SRC" -type f); do
+  filename=$(basename "$file")
+  dst="$MODPROBE_D_DST/$filename"
+  cp "$file" "$dst"
+done
+
 echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
 $DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force

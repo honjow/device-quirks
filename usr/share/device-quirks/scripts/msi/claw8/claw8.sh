@@ -40,3 +40,13 @@ for file in $(find "$MODULES_LOAD_D_SRC" -type f); do
   dst="$MODULES_LOAD_D_DST/$filename"
   cp "$file" "$dst"
 done
+
+# modprobe.d
+MODPROBE_D_DST="${MOUNT_PATH}/etc/modprobe.d/"
+MODPROBE_D_SRC="$DQ_PATH/scripts/msi/claw8/modprobe.d"
+mkdir -p "$MODPROBE_D_DST"
+for file in $(find "$MODPROBE_D_SRC" -type f); do
+  filename=$(basename "$file")
+  dst="$MODPROBE_D_DST/$filename"
+  cp "$file" "$dst"
+done
