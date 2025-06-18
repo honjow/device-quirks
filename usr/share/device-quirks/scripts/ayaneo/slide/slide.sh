@@ -9,3 +9,6 @@ cat  << EOF > /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
 [connection]
 wifi.powersave = 2
 EOF
+
+# Fix abnormal restart
+$DQ_PATH/scripts/kernel-options-manager --append acpi=strict
