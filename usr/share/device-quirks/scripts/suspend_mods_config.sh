@@ -30,6 +30,9 @@ if [[ ":$MSI_CLAW_LIST:" =~ ":$PRODUCT:" ]]; then
     if ! grep -q iwlmvm $suspend_mods_file; then
         echo "iwlmvm" >> $suspend_mods_file
     fi
+    if ! grep -q iwlmld $suspend_mods_file; then
+        echo "iwlmld" >> $suspend_mods_file
+    fi
 fi
 
 if [[ ":$GEEK_LIST:" =~ ":$PRODUCT:" || ":$AYANEO_2021_LIST:" =~ ":$PRODUCT:"  ]]; then
