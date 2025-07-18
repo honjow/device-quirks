@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2044,SC1091,SC2046
+# shellcheck disable=SC1091
 
 set -e
 
@@ -19,7 +19,12 @@ fi
 SYSCTL_DST="${MOUNT_PATH}/etc/sysctl.d/"
 SYSCTL_SRC="$DQ_PATH/scripts/msi/claw_a8/sysctl.d"
 mkdir -p "$SYSCTL_DST"
-for file in $(find "$SYSCTL_SRC" -type f); do
+
+# Use mapfile to read find results into array
+mapfile -t sysctl_files < <(find "$SYSCTL_SRC" -type f)
+
+# Loop through the array
+for file in "${sysctl_files[@]}"; do
   filename=$(basename "$file")
   dst="$SYSCTL_DST/$filename"
   mkdir -p $(dirname "$dst")
@@ -30,7 +35,8 @@ done
 # MODULES_LOAD_D_DST="${MOUNT_PATH}/etc/modules-load.d/"
 # MODULES_LOAD_D_SRC="$DQ_PATH/scripts/msi/claw_a8/modules-load.d"
 # mkdir -p "$MODULES_LOAD_D_DST"
-# for file in $(find "$MODULES_LOAD_D_SRC" -type f); do
+# mapfile -t modules_files < <(find "$MODULES_LOAD_D_SRC" -type f)
+# for file in "${modules_files[@]}"; do
 #   filename=$(basename "$file")
 #   dst="$MODULES_LOAD_D_DST/$filename"
 #   cp "$file" "$dst"
@@ -40,9 +46,15 @@ done
 MODPROBE_D_DST="${MOUNT_PATH}/etc/modprobe.d/"
 MODPROBE_D_SRC="$DQ_PATH/scripts/msi/claw_a8/modprobe.d"
 mkdir -p "$MODPROBE_D_DST"
-for file in $(find "$MODPROBE_D_SRC" -type f); do
+
+# Use mapfile to read find results into array
+mapfile -t modprobe_files < <(find "$MODPROBE_D_SRC" -type f)
+
+# Loop through the array
+for file in "${modprobe_files[@]}"; do
   filename=$(basename "$file")
   dst="$MODPROBE_D_DST/$filename"
+  echo "Copying $file to $dst"
   cp "$file" "$dst"
 done
 
