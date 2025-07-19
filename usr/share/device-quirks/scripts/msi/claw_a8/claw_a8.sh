@@ -65,5 +65,7 @@ done
 $DQ_PATH/scripts/kernel-options-manager --append amd_pmc.dyndbg=+p
 $DQ_PATH/scripts/kernel-options-manager --append acpi.ec_no_wakeup=1
 $DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=force
+$DQ_PATH/scripts/kernel-options-manager --remove iomem=relaxed
+
 # processor.max_cstate=9
 # $DQ_PATH/scripts/kernel-options-manager --append processor.max_cstate=9
