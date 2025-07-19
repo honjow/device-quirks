@@ -32,15 +32,19 @@ for file in "${sysctl_files[@]}"; do
 done
 
 # modules-load.d
-# MODULES_LOAD_D_DST="${MOUNT_PATH}/etc/modules-load.d/"
-# MODULES_LOAD_D_SRC="$DQ_PATH/scripts/msi/claw_a8/modules-load.d"
-# mkdir -p "$MODULES_LOAD_D_DST"
-# mapfile -t modules_files < <(find "$MODULES_LOAD_D_SRC" -type f)
-# for file in "${modules_files[@]}"; do
-#   filename=$(basename "$file")
-#   dst="$MODULES_LOAD_D_DST/$filename"
-#   cp "$file" "$dst"
-# done
+MODULES_LOAD_D_DST="${MOUNT_PATH}/etc/modules-load.d/"
+MODULES_LOAD_D_SRC="$DQ_PATH/scripts/msi/claw_a8/modules-load.d"
+mkdir -p "$MODULES_LOAD_D_DST"
+
+# Use mapfile to read find results into array
+mapfile -t modules_files < <(find "$MODULES_LOAD_D_SRC" -type f)
+
+# Loop through the array
+for file in "${modules_files[@]}"; do
+  filename=$(basename "$file")
+  dst="$MODULES_LOAD_D_DST/$filename"
+  cp "$file" "$dst"
+done
 
 # modprobe.d
 MODPROBE_D_DST="${MOUNT_PATH}/etc/modprobe.d/"
