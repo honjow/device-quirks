@@ -62,6 +62,13 @@ for file in "${modprobe_files[@]}"; do
   cp "$file" "$dst"
 done
 
+# remove ryzen_sum module config
+RYZEN_SUM_CONFIG="${MOUNT_PATH}/etc/modules-load.d/ryzen_sum.conf"
+if [ -f "$RYZEN_SUM_CONFIG" ]; then
+  rm "$RYZEN_SUM_CONFIG"
+  echo "Removed $RYZEN_SUM_CONFIG"
+fi
+
 $DQ_PATH/scripts/kernel-options-manager --append amd_pmc.dyndbg=+p
 $DQ_PATH/scripts/kernel-options-manager --append acpi.ec_no_wakeup=1
 $DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=force
