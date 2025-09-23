@@ -10,8 +10,23 @@ if [ ! -d /tmp/frzr_root ]; then
   MOUNT_PATH=""
 fi
 
+RATE=${1:-96000}
+
 # Force 16 bit audio, format S16LE, sample rate 96000.
 cp -a ${SUBVOL}/usr/share/wireplumber ${MOUNT_PATH}/etc/
 sed -i 's/--\["audio.format"\]/\["audio.format"\]/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
 sed -i 's/--\["audio.rate"\]/\["audio.rate"\]/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
-sed -i 's/44100/96000/' ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
+sed -i "s/44100/${RATE}/" ${MOUNT_PATH}/etc/wireplumber/main.lua.d/50-alsa-config.lua
+
+
+mkdir -p "${MOUNT_PATH}/etc/pipewire/pipewire.conf.d"
+cat <<EOF > "${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/60-bitrate.conf"
+stream.properties = {
+    default.format  = "S16LE"
+    default.rate    = ${RATE}
+}
+default.clock.quantum     = 1024
+default.clock.min-quantum = 512
+default.clock.max-quantum = 2048
+EOF
+
