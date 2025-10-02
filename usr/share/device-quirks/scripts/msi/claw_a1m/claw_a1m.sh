@@ -68,3 +68,7 @@ done
 
 echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
 $DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
+
+echo "Use Xe driver"
+$DQ_PATH/scripts/kernel-options-manager --append i915.force_probe=!7d55
+$DQ_PATH/scripts/kernel-options-manager --append xe.force_probe=7d55
