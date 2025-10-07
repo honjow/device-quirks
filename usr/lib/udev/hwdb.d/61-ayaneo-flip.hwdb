@@ -1,0 +1,9 @@
+evdev:name:Goodix Capacitive TouchScreen:dmi:*svnAYANEO:*pnFLIPDS**
+evdev:name:Goodix Capacitive TouchScreen:dmi:*svnAYANEO:*pnFLIPKB**
+evdev:name:Goodix Capacitive TouchScreen:dmi:*svnAYANEO:*pnFLIP1SDS**
+evdev:name:Goodix Capacitive TouchScreen:dmi:*svnAYANEO:*pnFLIP1SKB**
+ EVDEV_ABS_00=4119:8
+ EVDEV_ABS_01=1:1919:22
+ EVDEV_ABS_35=4:1199:8
+ EVDEV_ABS_36=1:1919:22
+ 
