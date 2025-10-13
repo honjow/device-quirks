@@ -24,16 +24,16 @@ if [[ ":$NEXT_LIST:" =~ ":$PRODUCT:" ]]; then
     fi
 fi
 
-if [[ ":$MSI_CLAW_LIST:" =~ ":$PRODUCT:" ]]; then
-    echo "MSI Claw detected, adding iwlmvm to the list of modules to be removed"
-    # add iwlmvm to the list of modules, if it's not already there
-    if ! grep -q iwlmvm $suspend_mods_file; then
-        echo "iwlmvm" >> $suspend_mods_file
-    fi
-    if ! grep -q iwlmld $suspend_mods_file; then
-        echo "iwlmld" >> $suspend_mods_file
-    fi
-fi
+# if [[ ":$MSI_CLAW_LIST:" =~ ":$PRODUCT:" ]]; then
+#     echo "MSI Claw detected, adding iwlmvm to the list of modules to be removed"
+#     # add iwlmvm to the list of modules, if it's not already there
+#     if ! grep -q iwlmvm $suspend_mods_file; then
+#         echo "iwlmvm" >> $suspend_mods_file
+#     fi
+#     if ! grep -q iwlmld $suspend_mods_file; then
+#         echo "iwlmld" >> $suspend_mods_file
+#     fi
+# fi
 
 if [[ ":$GEEK_LIST:" =~ ":$PRODUCT:" || ":$AYANEO_2021_LIST:" =~ ":$PRODUCT:"  ]]; then
     echo "GEEK detected, adding goodix_ts to the list of modules to be removed"

@@ -66,8 +66,11 @@ for file in "${modprobe_files[@]}"; do
   cp "$file" "$dst"
 done
 
-echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
-$DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
+# echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
+# $DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
+
+echo "Adding pcie_port_pm=off to fix wifi suspend/resume"
+$DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
 
 echo "Use Xe driver"
 $DQ_PATH/scripts/kernel-options-manager --append i915.force_probe=!7d55
