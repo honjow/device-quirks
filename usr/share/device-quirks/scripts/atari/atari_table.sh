@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
 PRODUCT_LIST="VCS"

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
 

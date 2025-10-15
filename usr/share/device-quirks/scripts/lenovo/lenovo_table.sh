@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
 BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"

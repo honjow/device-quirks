@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
 PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
 CPU_NAME="$(cat /proc/cpuinfo | awk 'NR==5 {print $4$5$6$7}')"
