@@ -1,0 +1,12 @@
+[Unit]
+Description=Save and restore TDP settings on sleep/resume
+Documentation=man:systemd-suspend.service(8)
+
+[Service]
+Type=simple
+ExecStart=/usr/share/device-quirks/scripts/steamosctl-sleep-handler.sh monitor
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
