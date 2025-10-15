@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 ### SYSTEM IDENTIFICATION SCRIPT
 export DQ_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 VENDOR="$(cat /sys/devices/virtual/dmi/id/board_vendor)"
@@ -70,3 +70,6 @@ $DQ_PATH/scripts/netdev_config.sh
 
 # Run suspend mods configuration script.
 $DQ_PATH/scripts/suspend_mods_config.sh
+
+# Run steamosctl sleep service
+$DQ_PATH/scripts/enable-steamosctl-sleep

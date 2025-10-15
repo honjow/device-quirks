@@ -1,0 +1,16 @@
+#!/bin/bash
+
+USER=$(id -nu 1000)
+SERVICE_NAME="steamosctl-sleep.service"
+
+# Use systemctl --machine to access user's systemd from root
+IS_ENABLED=$(systemctl --user --machine="${USER}@.host" is-enabled "$SERVICE_NAME" 2>/dev/null || echo "disabled")
+
+if [ "$IS_ENABLED" = "disabled" ]; then
+    echo "Enabling $SERVICE_NAME for user $USER"
+    systemctl --user --machine="${USER}@.host" enable "$SERVICE_NAME"
+    systemctl --user --machine="${USER}@.host" start "$SERVICE_NAME"
+    echo "Systemd Service: $SERVICE_NAME enabled and started"
+else
+    echo "Systemd Service: $SERVICE_NAME already enabled: $IS_ENABLED"
+fi
