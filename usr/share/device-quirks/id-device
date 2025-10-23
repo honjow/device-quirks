@@ -72,4 +72,4 @@ $DQ_PATH/scripts/netdev_config.sh
 $DQ_PATH/scripts/suspend_mods_config.sh
 
 # Run steamosctl sleep service
-$DQ_PATH/scripts/enable-steamosctl-sleep
+$DQ_PATH/scripts/enable-steamosctl-sleep || true
