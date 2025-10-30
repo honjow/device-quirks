@@ -3,6 +3,11 @@
 USER=$(id -nu 1000)
 SERVICE_NAME="steamosctl-sleep.service"
 
+if [ -z "$USER" ]; then
+    echo "User of UID 1000 not found, skipping steamosctl-sleep service"
+    exit 0
+fi
+
 # Use systemctl --machine to access user's systemd from root
 IS_ENABLED=$(systemctl --user --machine="${USER}@.host" is-enabled "$SERVICE_NAME" 2>&1)
 
