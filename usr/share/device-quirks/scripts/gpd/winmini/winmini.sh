@@ -26,9 +26,6 @@ if [[ -f "${MINI_CONF}" ]]; then
   # Copy the PipeWire folder to /etc
   cp "${MINI_CONF}" "${PIPEWIRE_DIR}"
   echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
-else
-  echo "PipeWire config not found at ${MINI_CONF}"
-  exit 1
 fi
 
 if [[ $USE_FIRMWARE_OVERRIDES == 1 ]]; then
