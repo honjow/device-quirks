@@ -1,0 +1,12 @@
+[Unit]
+Description=Fix audio on the OneXplayer 2 Pro
+After=sound.target
+Requires=sound.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/usr/share/device-quirks/scripts/oxp/oxp2p-audio-fix.sh -y'
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
