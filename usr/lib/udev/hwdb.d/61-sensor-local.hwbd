@@ -3,3 +3,7 @@
 ##################
 sensor:modalias:acpi:BMI0160*:dmi:*:svnGPD:pnG1619*:*
   ACCEL_MOUNT_MATRIX=0, -1, 0; -1, 0, 0; 0, 0, 1
+
+# OneXPlayer 2 Pro
+sensor:modalias:acpi:10EC5280*:dmi:*:rnONEXPLAYER2PROARP23P:rvrVersion1.0:*
+  ACCEL_MOUNT_MATRIX=0, -1, 0; -1, 0, 0; 0, 0, 1
