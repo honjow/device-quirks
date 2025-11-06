@@ -7,3 +7,6 @@ fi
 # Force 16 bit audio, format S16LE, sample rate 44100.
 echo "Force S16LE 44100hz"
 $DQ_PATH/scripts/override_bitrate 44100
+
+
+$DQ_PATH/scripts/kernel-options-manager --append video=eDP-1:panel_orientation=left_side_up
