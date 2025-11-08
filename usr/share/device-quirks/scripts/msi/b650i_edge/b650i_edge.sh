@@ -19,3 +19,6 @@ WIREPLUMBER_SRC="$DQ_PATH/scripts/msi/b650i_edge/wireplumber.conf.d"
 
 # wireplumber_config.sh
 $DQ_PATH/scripts/wireplumber_config.sh "$WIREPLUMBER_SRC" "$WIREPLUMBER_DST"
+
+$DQ_PATH/scripts/kernel-options-manager --append amdgpu.runpm=0
+$DQ_PATH/scripts/kernel-options-manager --append amdgpu.dcdebugmask=0x10
