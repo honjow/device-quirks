@@ -65,3 +65,6 @@ for file in "${modprobe_files[@]}"; do
   dst="$MODPROBE_D_DST/$filename"
   cp "$file" "$dst"
 done
+
+# Ensure IPv6 is enabled in NetworkManager connections
+$DQ_PATH/scripts/enable_ipv6.sh

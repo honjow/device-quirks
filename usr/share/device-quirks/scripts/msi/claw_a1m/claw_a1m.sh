@@ -75,3 +75,6 @@ $DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
 echo "Use Xe driver"
 $DQ_PATH/scripts/kernel-options-manager --append i915.force_probe=!7d55
 $DQ_PATH/scripts/kernel-options-manager --append xe.force_probe=7d55
+
+# Ensure IPv6 is enabled in NetworkManager connections
+$DQ_PATH/scripts/enable_ipv6.sh

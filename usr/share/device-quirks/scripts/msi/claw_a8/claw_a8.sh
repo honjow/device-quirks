@@ -76,3 +76,6 @@ $DQ_PATH/scripts/kernel-options-manager --remove iomem=relaxed
 
 # processor.max_cstate=9
 # $DQ_PATH/scripts/kernel-options-manager --append processor.max_cstate=9
+
+# Ensure IPv6 is enabled in NetworkManager connections
+$DQ_PATH/scripts/enable_ipv6.sh
