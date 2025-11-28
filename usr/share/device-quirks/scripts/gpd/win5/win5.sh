@@ -37,3 +37,33 @@ fi
 # Note: Not using --restart-connections by default to avoid network interruption
 $DQ_PATH/scripts/enable_ipv6.sh
 
+# Define the path of the gpd win5 pipewire config and pipewire folders
+WIN5_CONF="$DQ_PATH/scripts/gpd/win5/pipewire.conf.d/filter-chain.conf"
+PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
+
+# Check if the PipeWire directory exists
+if [[ -f "${WIN5_CONF}" ]]; then
+  echo "Installing pipewire config from ${WIN5_CONF} to ${PIPEWIRE_DIR}"
+  if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
+    mkdir -p "${PIPEWIRE_DIR}"
+  fi
+
+  # Copy the PipeWire folder to /etc
+  cp "${WIN5_CONF}" "${PIPEWIRE_DIR}"
+  echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+fi
+
+# Define the path for WirePlumber configuration
+WIN5_WP_CONF="$DQ_PATH/scripts/gpd/win5/wireplumber.conf.d/80-alsa-headroom.conf"
+WIREPLUMBER_DIR="${MOUNT_PATH}/etc/wireplumber/wireplumber.conf.d/"
+
+# Install WirePlumber headroom configuration
+if [[ -f "${WIN5_WP_CONF}" ]]; then
+  echo "Installing wireplumber config from ${WIN5_WP_CONF} to ${WIREPLUMBER_DIR}"
+  if [[ ! -d "${WIREPLUMBER_DIR}" ]]; then
+    mkdir -p "${WIREPLUMBER_DIR}"
+  fi
+
+  cp "${WIN5_WP_CONF}" "${WIREPLUMBER_DIR}"
+  echo "WirePlumber configuration successfully copied to ${WIREPLUMBER_DIR}"
+fi
