@@ -1,5 +1,6 @@
 # If a GPU crash is caused by a specific process, kill the PID
 ACTION=="change", ENV{DEVNAME}=="/dev/dri/card[0-9]*", ENV{RESET}=="1", ENV{PID}!="0", RUN+="/sbin/kill -9 %E{PID}"
 
-# Kill lightdm and Gamescope if the GPU crashes and VRAM is lost
-ACTION=="change", ENV{DEVNAME}=="/dev/dri/card[0-9]*", ENV{RESET}=="1", ENV{FLAGS}=="1", RUN+="/usr/sbin/systemctl restart lightdm"
+# Restart display manager if the GPU crashes and VRAM is lost
+# Hardware reset is handled by amdgpu.gpu_recovery=1, we only need to restart the DM
+ACTION=="change", ENV{DEVNAME}=="/dev/dri/card[0-9]*", ENV{RESET}=="1", ENV{FLAGS}=="1", RUN+="/usr/bin/systemctl restart sddm"
