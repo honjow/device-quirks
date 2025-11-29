@@ -22,3 +22,11 @@ $DQ_PATH/scripts/wireplumber_config.sh "$WIREPLUMBER_SRC" "$WIREPLUMBER_DST"
 
 $DQ_PATH/scripts/kernel-options-manager --append amdgpu.runpm=0
 $DQ_PATH/scripts/kernel-options-manager --append amdgpu.dcdebugmask=0x10
+
+# Fix for display freeze/timeout issues
+# dc_log_mask=0x0 disables most DC (Display Core) debug logging which can help stability
+# ppfeaturemask=0xffffffff enables all power features for better power management
+# gpu_recovery=1 enables automatic GPU recovery on hangs
+$DQ_PATH/scripts/kernel-options-manager --append amdgpu.dc_log_mask=0x0
+$DQ_PATH/scripts/kernel-options-manager --append amdgpu.ppfeaturemask=0xffffffff
+$DQ_PATH/scripts/kernel-options-manager --append amdgpu.gpu_recovery=1
