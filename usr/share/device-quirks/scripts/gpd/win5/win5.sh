@@ -67,25 +67,3 @@ if [[ -f "${WIN5_WP_CONF}" ]]; then
   cp "${WIN5_WP_CONF}" "${WIREPLUMBER_DIR}"
   echo "WirePlumber configuration successfully copied to ${WIREPLUMBER_DIR}"
 fi
-
-# Define the path for iwlwifi (Intel WiFi) configuration
-WIN5_IWLWIFI_CONF="$DQ_PATH/scripts/gpd/win5/modprobe.d/iwlwifi.conf"
-MODPROBE_DIR="${MOUNT_PATH}/etc/modprobe.d/"
-
-# Install iwlwifi configuration (fix for AX210 crashes under high load)
-if [[ -f "${WIN5_IWLWIFI_CONF}" ]]; then
-  echo "Installing iwlwifi config from ${WIN5_IWLWIFI_CONF} to ${MODPROBE_DIR}"
-  if [[ ! -d "${MODPROBE_DIR}" ]]; then
-    mkdir -p "${MODPROBE_DIR}"
-  fi
-
-  cp "${WIN5_IWLWIFI_CONF}" "${MODPROBE_DIR}"
-  echo "iwlwifi configuration successfully copied to ${MODPROBE_DIR}"
-  
-  # Rebuild initramfs if not in install mode
-  if [[ -z "${MOUNT_PATH}" ]]; then
-    echo "Rebuilding initramfs to apply iwlwifi changes..."
-    mkinitcpio -P
-    echo "NOTE: Reboot required for iwlwifi changes to take effect"
-  fi
-fi
