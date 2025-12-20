@@ -4,8 +4,7 @@ local panel_id = "tf_handle5_lcd"
 local panel_name = "TF Handle 5 LCD"
 local panel_refresh_rates = { 60, 120 }
 
--- test
-for i = 61, 119 do
+for i = 115, 119 do
   table.insert(panel_refresh_rates, i)
 end
 table.sort(panel_refresh_rates)
