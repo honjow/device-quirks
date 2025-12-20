@@ -13,6 +13,7 @@ LENOVO_LIST="LENOVO"
 OXP_LIST="ONE-NETBOOK TECHNOLOGY CO., LTD.:ONE-NETBOOK"
 MSI_LIST="Micro-Star International Co., Ltd."
 ORANGEPI_LIST="OrangePi"
+TF_LIST="Terrans Force"
 
 
 # AOKZOE Devices
@@ -59,6 +60,11 @@ elif [[ ":$MSI_LIST:" =~ ":${VENDOR}:" ]]; then
 elif [[ ":$ORANGEPI_LIST:" =~ ":${VENDOR}:" ]]; then
     echo "OrangePi Device Found!"
     $DQ_PATH/scripts/orangepi/orangepi_table.sh
+
+# TF Devices
+elif [[ ":$TF_LIST:" =~ ":${VENDOR}:" ]]; then
+    echo "TF Device Found!"
+    $DQ_PATH/scripts/tf/tf_table.sh
 
 # Unrecognized Device
 else
