@@ -19,14 +19,17 @@ PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
 
 # Check if the PipeWire directory exists
 if [[ -d "${POCKET4_CONF_DIR}" ]]; then
-  echo "Installing pipewire config from ${POCKET4_CONF_DIR} to ${PIPEWIRE_DIR}"
   if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
     mkdir -p "${PIPEWIRE_DIR}"
   fi
 
-  # Copy the PipeWire files to /etc
-  cp -rf "${POCKET4_CONF_DIR}"/* "${PIPEWIRE_DIR}"
-  echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+  # Copy only .conf files to /etc
+  for file in "${POCKET4_CONF_DIR}"/*; do
+    [[ -f "${file}" ]] || continue
+    echo "Installing pipewire config from ${file} to ${PIPEWIRE_DIR}"
+    cp "${file}" "${PIPEWIRE_DIR}"
+    echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+  done
 else
   echo "PipeWire config not found at ${POCKET4_CONF_DIR}"
   exit 1

@@ -5,15 +5,18 @@ if [ $(whoami) != 'root' ]; then
 fi
 
 PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
-EQ_CONF="$DQ_PATH/scripts/ayaneo/2/pipewire.conf.d/filter-chain-eq.conf"
-if [[ -f "${EQ_CONF}" ]]; then
+PIPEWIRE_CONF_DIR="$DQ_PATH/scripts/ayaneo/2/pipewire.conf.d/"
+if [[ -d "${PIPEWIRE_CONF_DIR}" ]]; then
   if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
     mkdir -p "${PIPEWIRE_DIR}"
   fi
-  
-  echo "Installing pipewire eq config from ${EQ_CONF} to ${PIPEWIRE_DIR}"
-  cp "${EQ_CONF}" "${PIPEWIRE_DIR}"
-  echo "PipeWire eq configuration successfully copied to ${PIPEWIRE_DIR}"
+
+  for file in "${PIPEWIRE_CONF_DIR}"/*.conf; do
+    [[ -f "${file}" ]] || continue
+    echo "Installing pipewire config from ${file} to ${PIPEWIRE_DIR}"
+    cp "${file}" "${PIPEWIRE_DIR}"
+    echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+  done
 fi
 
 # Force 16 bit audio, format S16LE, sample rate 96000.

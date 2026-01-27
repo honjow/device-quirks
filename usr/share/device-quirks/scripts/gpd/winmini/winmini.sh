@@ -13,19 +13,21 @@ else
 fi
 
 # Define the path of the gpd win mini pipewire config and pipewire folders
-MINI_CONF="$DQ_PATH/scripts/gpd/winmini/pipewire.conf.d/filter-chain.conf"
+PIPEWIRE_CONF_DIR="$DQ_PATH/scripts/gpd/winmini/pipewire.conf.d/"
 PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
 
-# Check if the PipeWire directory exists
-if [[ -f "${MINI_CONF}" ]]; then
-  echo "Installing pipewire config from ${MINI_CONF} to ${PIPEWIRE_DIR}"
+# Install PipeWire configuration files
+if [[ -d "${PIPEWIRE_CONF_DIR}" ]]; then
   if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
     mkdir -p "${PIPEWIRE_DIR}"
   fi
 
-  # Copy the PipeWire folder to /etc
-  cp "${MINI_CONF}" "${PIPEWIRE_DIR}"
-  echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+  for file in "${PIPEWIRE_CONF_DIR}"/*.conf; do
+    [[ -f "${file}" ]] || continue
+    echo "Installing pipewire config from ${file} to ${PIPEWIRE_DIR}"
+    cp "${file}" "${PIPEWIRE_DIR}"
+    echo "PipeWire configuration successfully copied to ${PIPEWIRE_DIR}"
+  done
 fi
 
 if [[ $USE_FIRMWARE_OVERRIDES == 1 ]]; then
