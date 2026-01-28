@@ -5,10 +5,14 @@ KERNEL=="hidraw*", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="02fd", MODE="0660
 KERNEL=="hidraw*", KERNELS=="*045E:0B13*", MODE="0660", TAG+="uaccess"
 KERNEL=="hidraw*", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0b13", MODE="0660", TAG+="uaccess"
 
-# Xbox Elite V2
+# Xbox Elite V2 Controller Bluetooth; USB
+KERNEL=="hidraw*", KERNELS=="*045E:0B00*", MODE="0660", TAG+="uaccess"
+KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0b00", MODE="0660", TAG+="uaccess"
+
+# Xbox Elite V2 Controller; Bluetooth
 KERNEL=="hidraw*", KERNELS=="*045E:0B05*", MODE="0660", TAG+="uaccess"
 KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0b05", MODE="0660", TAG+="uaccess"
 
-# Xbox Elite V2 Core
+# Xbox Elite V2 Controller; BLE
 KERNEL=="hidraw*", KERNELS=="*045E:0B22*", MODE="0660", TAG+="uaccess"
 KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0b22", MODE="0660", TAG+="uaccess"
