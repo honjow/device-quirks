@@ -2,6 +2,13 @@
 KERNEL=="hidraw*", KERNELS=="*045E:02FD*", MODE="0660", TAG+="uaccess"
 KERNEL=="hidraw*", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="02fd", MODE="0660", TAG+="uaccess"
 
+KERNEL=="hidraw*", KERNELS=="*045E:0B13*", MODE="0660", TAG+="uaccess"
+KERNEL=="hidraw*", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="0b13", MODE="0660", TAG+="uaccess"
+
 # Xbox Elite V2
 KERNEL=="hidraw*", KERNELS=="*045E:0B05*", MODE="0660", TAG+="uaccess"
-KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0B05", MODE="0660", TAG+="uaccess"
+KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0b05", MODE="0660", TAG+="uaccess"
+
+# Xbox Elite V2 Core
+KERNEL=="hidraw*", KERNELS=="*045E:0B22*", MODE="0660", TAG+="uaccess"
+KERNEL=="hidraw*", ATTRS{idVendor}=="045E", ATTRS{idProduct}=="0b22", MODE="0660", TAG+="uaccess"
