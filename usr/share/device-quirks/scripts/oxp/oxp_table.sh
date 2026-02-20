@@ -1,9 +1,11 @@
 #!/bin/bash
 
 PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
+BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
 
 OXP2_LIST="ONEXPLAYER 2 ARP23"
 OXP2PRO_LIST="ONEXPLAYER 2 PRO ARP23H:ONEXPLAYER 2 PRO ARP23P:ONEXPLAYER 2 PRO ARP23P EVA-01"
+OXP_APEX_LIST="ONEXPLAYER APEX"
 
 if [[ "ONEXPLAYER Mini Pro" == "$PRODUCT_NAME" ]]; then
     echo "OXP Mini Pro"
@@ -16,6 +18,10 @@ elif [[ ":$OXP2_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
 elif [[ ":$OXP2PRO_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
     echo "OXP 2 Pro"
     $DQ_PATH/scripts/oxp/2pro/2pro.sh
+
+elif [[ ":$OXP_APEX_LIST:" =~ ":$BOARD_NAME:" ]]; then
+    echo "OXP Apex"
+    $DQ_PATH/scripts/oxp/apex/apex.sh
     
 else
     echo "${PRODUCT_NAME} does not have a quirk configuration script. Exiting."
