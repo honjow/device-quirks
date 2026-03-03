@@ -67,7 +67,7 @@ for file in "${modprobe_files[@]}"; do
 done
 
 # echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
-# $DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
+$DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
 
 echo "Adding pcie_port_pm=off to fix wifi suspend/resume"
 $DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
