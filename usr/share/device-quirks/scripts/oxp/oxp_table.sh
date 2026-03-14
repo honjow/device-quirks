@@ -1,15 +1,16 @@
 #!/bin/bash
 
-PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
-BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
+PRODUCT_NAME="$(cat /sys/class/dmi/id/product_name)"
+BOARD_NAME="$(cat /sys/class/dmi/id/board_name)"
 
 OXP2_LIST="ONEXPLAYER 2 ARP23"
 OXP2PRO_LIST="ONEXPLAYER 2 PRO ARP23H:ONEXPLAYER 2 PRO ARP23P:ONEXPLAYER 2 PRO ARP23P EVA-01"
 OXP_APEX_LIST="ONEXPLAYER APEX"
+OXP_MINI_LIST="ONE XPLAYER:ONEXPLAYER mini A07:ONEXPLAYER mini GA72:ONEXPLAYER mini GT72:ONEXPLAYER Mini Pro"
 
-if [[ "ONEXPLAYER Mini Pro" == "$PRODUCT_NAME" ]]; then
-    echo "OXP Mini Pro"
-    $DQ_PATH/scripts/oxp/mini_pro/mini_pro.sh
+if [[ ":$OXP_MINI_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
+    echo "OXP Mini"
+    $DQ_PATH/scripts/oxp/mini/mini.sh
 
 elif [[ ":$OXP2_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
     echo "OXP 2"

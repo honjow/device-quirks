@@ -10,3 +10,6 @@ $DQ_PATH/scripts/override_bitrate 44100
 
 
 $DQ_PATH/scripts/kernel-options-manager --append video=eDP-1:panel_orientation=left_side_up
+
+echo "Adding pcie_port_pm=off to fix wifi suspend/resume"
+$DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
