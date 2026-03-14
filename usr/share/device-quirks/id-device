@@ -1,7 +1,7 @@
 #!/bin/bash
 ### SYSTEM IDENTIFICATION SCRIPT
 export DQ_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-VENDOR="$(cat /sys/devices/virtual/dmi/id/board_vendor)"
+VENDOR="$(cat /sys/class/dmi/id/board_vendor)"
 ### DEVICE LISTS
 
 AOK_LIST="AOKZOE"

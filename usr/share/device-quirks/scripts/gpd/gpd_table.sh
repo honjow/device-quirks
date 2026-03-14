@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
+BOARD_NAME="$(cat /sys/class/dmi/id/board_name)"
 
 # Win3
 BOARD_WIN3="G1618-03"

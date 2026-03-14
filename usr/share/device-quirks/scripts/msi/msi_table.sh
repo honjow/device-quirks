@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOARD_NAME="$(cat /sys/devices/virtual/dmi/id/board_name)"
+BOARD_NAME="$(cat /sys/class/dmi/id/board_name)"
 
 # B650I EDGE WIFI
 BOARD_B650I_EDGE="MPG B650I EDGE WIFI (MS-7D73)"

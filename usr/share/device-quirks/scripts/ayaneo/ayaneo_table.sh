@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
+PRODUCT_NAME="$(cat /sys/class/dmi/id/product_name)"
 PRODUCT_LIST_AIR_1S="AIR 1S:AIR 1S Limited"
 PRODUCT_LIST_AIR_PLUS="AIR Plus"
 PRODUCT_LIST_2="AYANEO 2:AYANEO 2S:GEEK:GEEK 1S"

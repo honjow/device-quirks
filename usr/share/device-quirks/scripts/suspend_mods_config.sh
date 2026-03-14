@@ -5,7 +5,7 @@ if [ ! -d /tmp/frzr_root ]; then
   MOUNT_PATH=""
 fi
 
-PRODUCT=$(cat /sys/devices/virtual/dmi/id/product_name)
+PRODUCT=$(cat /sys/class/dmi/id/product_name)
 
 AIR_LIST="AIR:AIR Pro"
 NEXT_LIST="NEXT Advance:NEXT Lite:NEXT Pro:NEXT"

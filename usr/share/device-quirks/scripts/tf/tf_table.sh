@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PRODUCT_NAME="$(cat /sys/devices/virtual/dmi/id/product_name)"
+PRODUCT_NAME="$(cat /sys/class/dmi/id/product_name)"
 
 HANDLE5_LIST="Handle 5"
 
