@@ -20,7 +20,7 @@ elif [[ ":$OXP2PRO_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
     echo "OXP 2 Pro"
     $DQ_PATH/scripts/oxp/2pro/2pro.sh
 
-elif [[ ":$OXP_APEX_LIST:" =~ ":$BOARD_NAME:" ]]; then
+elif [[ ":$OXP_APEX_LIST:" =~ ":$PRODUCT_NAME:" ]]; then
     echo "OXP Apex"
     $DQ_PATH/scripts/oxp/apex/apex.sh
     
