@@ -12,5 +12,8 @@ fi
 # fix Issue: Device fails to wake up from sleep mode
 $DQ_PATH/scripts/kernel-options-manager --append amd_iommu=off
 
+# mem_sleep_default=s2idle
+$DQ_PATH/scripts/kernel-options-manager --append mem_sleep_default=s2idle
+
 # fix Issue: Issue: Controller becomes unresponsive after waking from sleep
 $DQ_PATH/scripts/kernel-options-manager --append xpad.cpoll=1
