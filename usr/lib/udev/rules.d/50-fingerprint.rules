@@ -7,6 +7,8 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="2808", ATTR{idProduct}=="9338", ATTR{remove}=
 SUBSYSTEM=="usb", ATTR{idVendor}=="2541", ATTR{idProduct}=="9711", ATTR{remove}="1"
 
 # Validity Sensors, Inc. Fingerprint Reader
-ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="2808", ATTR{idProduct}=="0752", \
-    TEST=="power/control", ATTR{power/control}="auto", \
-    TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+#ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="2808", ATTR{idProduct}=="0752", \
+#    TEST=="power/control", ATTR{power/control}="auto", \
+#    TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="2808", ATTR{idProduct}=="0752", RUN+="/bin/sh -c 'echo 1 > /sys/bus/usb/devices/%k/remove'"
