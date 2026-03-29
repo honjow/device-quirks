@@ -41,7 +41,7 @@ $DQ_PATH/scripts/enable_ipv6.sh
 WIN5_CONF="$DQ_PATH/scripts/gpd/win5/pipewire.conf.d/"
 PIPEWIRE_DIR="${MOUNT_PATH}/etc/pipewire/pipewire.conf.d/"
 
-for file in "${WIN5_CONF}"/*.conf; do
+for file in "${WIN5_CONF}"/*; do
   [[ -f "${file}" ]] || continue
   echo "Installing pipewire config from ${file} to ${PIPEWIRE_DIR}"
   if [[ ! -d "${PIPEWIRE_DIR}" ]]; then
