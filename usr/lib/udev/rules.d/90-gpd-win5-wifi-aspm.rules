@@ -4,5 +4,10 @@
 # Note: This is GPD Win5 specific - other devices with AX210 may not need this
 
 # Disable ASPM for Intel AX210 on GPD Win5
-SUBSYSTEM=="pci", ATTR{vendor}=="0x8086", ATTR{device}=="0x2725", DRIVER=="iwlwifi", PROGRAM=="/usr/bin/sh -c 'test $(cat /sys/class/dmi/id/product_name) = G1618-05'", RUN+="/usr/bin/setpci -s $kernel CAP_EXP+10.w=0x0040"
+# setpci uses value:mask form, only LNKCTL bits 0-1 (ASPM Control) are touched
+SUBSYSTEM=="pci", ATTR{vendor}=="0x8086", ATTR{device}=="0x2725", DRIVER=="iwlwifi", PROGRAM=="/usr/bin/grep -Fxq G1618-05 /sys/class/dmi/id/product_name", RUN+="/usr/bin/setpci -s $kernel CAP_EXP+10.w=0x0000:0x0003"
+
+# Alternative (kernel >= 6.2): use the PCIe ASPM sysfs interface so the kernel's
+# ASPM state machine stays in sync. Keep one of the two rules, not both.
+#SUBSYSTEM=="pci", ATTR{vendor}=="0x8086", ATTR{device}=="0x2725", DRIVER=="iwlwifi", PROGRAM=="/usr/bin/grep -Fxq G1618-05 /sys/class/dmi/id/product_name", ATTR{link/l1_aspm}="0", ATTR{link/l0s_aspm}="0"
 
