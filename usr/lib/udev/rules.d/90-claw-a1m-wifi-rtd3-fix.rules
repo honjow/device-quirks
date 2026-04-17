@@ -1,8 +1,0 @@
-# Fix WiFi suspend/resume on MSI Claw A1M (Intel BE200 + Meteor Lake PCH)
-# The PCH PCIe Root Port (8086:7e38) hosting the WiFi enters D3hot via runtime PM,
-# but the BIOS _PR3 path doesn't restore the link cleanly on resume, leaving the
-# BE200 non-functional. Pinning that single Root Port at D0 avoids the bad path
-# while letting every other PCIe port keep RTD3 working.
-#
-# This replaces the global "pcie_port_pm=off" kernel parameter with a targeted fix.
-SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{vendor}=="0x8086", ATTR{device}=="0x7e38", PROGRAM=="/usr/bin/grep -Fxq 'Claw A1M' /sys/class/dmi/id/product_name", ATTR{power/control}="on"

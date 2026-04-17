@@ -69,10 +69,8 @@ done
 # echo "Adding pcie_aspm=force to kernel options, to fix suspend/resume"
 $DQ_PATH/scripts/kernel-options-manager --append pcie_aspm=force
 
-# Replaced by udev rule 90-claw-a1m-wifi-rtd3-fix.rules, which pins only the
-# WiFi upstream Root Port at D0 instead of disabling runtime PM on every port.
-#echo "Adding pcie_port_pm=off to fix wifi suspend/resume"
-#$DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
+echo "Adding pcie_port_pm=off to fix wifi suspend/resume"
+$DQ_PATH/scripts/kernel-options-manager --append pcie_port_pm=off
 
 echo "Use Xe driver"
 $DQ_PATH/scripts/kernel-options-manager --append i915.force_probe=!7d55
